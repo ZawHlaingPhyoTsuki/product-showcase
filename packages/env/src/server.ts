@@ -12,6 +12,8 @@ export const env = createEnv({
 			.enum(["development", "production", "test"])
 			.default("development"),
 	},
+	clientPrefix: "NEXT_PUBLIC_",
+	client: {},
 	runtimeEnv: process.env,
 	emptyStringAsUndefined: true,
 });

@@ -1,24 +1,24 @@
 {
-  "name": "@product-showcase/auth",
-  "type": "module",
-  "exports": {
-    ".": {
-      "default": "./src/index.ts"
-    },
-    "./*": {
-      "default": "./src/*.ts"
-    }
-  },
-  "scripts": {},
-  "devDependencies": {
-    "typescript": "catalog:",
-    "@product-showcase/config": "workspace:*"
-  },
-  "dependencies": {
-    "better-auth": "catalog:",
-    "dotenv": "catalog:",
-    "zod": "catalog:",
-    "@product-showcase/env": "workspace:*",
-    "@product-showcase/db": "workspace:*"
-  }
+	"name": "@product-showcase/auth",
+	"type": "module",
+	"exports": {
+		".": {
+			"default": "./src/index.ts"
+		},
+		"./*": {
+			"default": "./src/*.ts"
+		}
+	},
+	"scripts": {},
+	"devDependencies": {
+		"typescript": "catalog:",
+		"@product-showcase/config": "workspace:*"
+	},
+	"dependencies": {
+		"better-auth": "catalog:",
+		"dotenv": "catalog:",
+		"zod": "catalog:",
+		"@product-showcase/env": "workspace:*",
+		"@product-showcase/db": "workspace:*"
+	}
 }

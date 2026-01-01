@@ -19,7 +19,7 @@
 	"scripts": {
 		"check": "biome check --write .",
 		"dev": "turbo dev",
-		"build": "turbo build",
+		"build": "bun run db:generate && turbo build",
 		"check-types": "turbo check-types",
 		"dev:native": "turbo -F native dev",
 		"dev:web": "turbo -F web dev",

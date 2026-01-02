@@ -1,5 +1,5 @@
-import { auth } from "@product-showcase/auth";
-import { env } from "@product-showcase/env/server";
+import { auth } from "@tcl-ecommerce/auth";
+import { env } from "@tcl-ecommerce/env/server";
 import { toNodeHandler } from "better-auth/node";
 import cors from "cors";
 import express from "express";
@@ -9,7 +9,7 @@ const app = express();
 app.use(
 	cors({
 		origin: env.CORS_ORIGIN,
-		methods: ["GET", "POST", "OPTIONS"],
+		// methods: ["GET", "POST", "OPTIONS"],
 		allowedHeaders: ["Content-Type", "Authorization"],
 		credentials: true,
 	}),

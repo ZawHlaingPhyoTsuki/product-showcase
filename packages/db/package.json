@@ -1,5 +1,5 @@
 {
-	"name": "@product-showcase/db",
+	"name": "@tcl-ecommerce/db",
 	"type": "module",
 	"exports": {
 		".": {
@@ -23,7 +23,7 @@
 		"prisma": "^7.1.0",
 		"@types/pg": "^8.15.6",
 		"typescript": "catalog:",
-		"@product-showcase/config": "workspace:*"
+		"@tcl-ecommerce/config": "workspace:*"
 	},
 	"dependencies": {
 		"@prisma/client": "catalog:",
@@ -31,6 +31,6 @@
 		"pg": "^8.16.3",
 		"dotenv": "catalog:",
 		"zod": "catalog:",
-		"@product-showcase/env": "workspace:*"
+		"@tcl-ecommerce/env": "workspace:*"
 	}
 }

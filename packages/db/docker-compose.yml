@@ -1,17 +1,17 @@
-name: product-showcase
+name: tcl-ecommerce
 
 services:
   postgres:
     image: postgres
-    container_name: product-showcase-postgres
+    container_name: tcl-ecommerce-postgres
     environment:
-      POSTGRES_DB: product-showcase
+      POSTGRES_DB: tcl-ecommerce
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     ports:
       - "5432:5432"
     volumes:
-      - product-showcase_postgres_data:/var/lib/postgresql
+      - tcl-ecommerce_postgres_data:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -20,4 +20,4 @@ services:
     restart: unless-stopped
 
 volumes:
-  product-showcase_postgres_data:
+  tcl-ecommerce_postgres_data:

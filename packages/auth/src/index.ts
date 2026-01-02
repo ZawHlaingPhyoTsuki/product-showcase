@@ -1,5 +1,6 @@
-import prisma from "@product-showcase/db";
-import { env } from "@product-showcase/env/server";
+import { expo } from "@better-auth/expo";
+import prisma from "@tcl-ecommerce/db";
+import { env } from "@tcl-ecommerce/env/server";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 
@@ -7,7 +8,7 @@ export const auth = betterAuth({
 	database: prismaAdapter(prisma, {
 		provider: "postgresql",
 	}),
-	trustedOrigins: [env.CORS_ORIGIN],
+	trustedOrigins: [env.CORS_ORIGIN, "mybettertapp://", "exp://"],
 	emailAndPassword: {
 		enabled: true,
 	},
@@ -18,4 +19,5 @@ export const auth = betterAuth({
 			httpOnly: true,
 		},
 	},
+	plugins: [expo()],
 });

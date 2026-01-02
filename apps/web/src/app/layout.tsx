@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "product-showcase",
-	description: "product-showcase",
+	title: "tcl-ecommerce",
+	description: "tcl-ecommerce",
 };
 
 export default function RootLayout({

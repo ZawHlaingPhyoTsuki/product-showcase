@@ -1,5 +1,5 @@
 {
-	"name": "@product-showcase/auth",
+	"name": "@tcl-ecommerce/auth",
 	"type": "module",
 	"exports": {
 		".": {
@@ -12,13 +12,14 @@
 	"scripts": {},
 	"devDependencies": {
 		"typescript": "catalog:",
-		"@product-showcase/config": "workspace:*"
+		"@tcl-ecommerce/config": "workspace:*"
 	},
 	"dependencies": {
 		"better-auth": "catalog:",
+		"@better-auth/expo": "catalog:",
 		"dotenv": "catalog:",
 		"zod": "catalog:",
-		"@product-showcase/env": "workspace:*",
-		"@product-showcase/db": "workspace:*"
+		"@tcl-ecommerce/env": "workspace:*",
+		"@tcl-ecommerce/db": "workspace:*"
 	}
 }

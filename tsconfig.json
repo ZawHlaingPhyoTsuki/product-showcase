@@ -1,3 +1,3 @@
 {
-	"extends": "@product-showcase/config/tsconfig.base.json"
+	"extends": "@tcl-ecommerce/config/tsconfig.base.json"
 }

@@ -1,4 +1,4 @@
-import "@product-showcase/env/web";
+import "@tcl-ecommerce/env/web";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {

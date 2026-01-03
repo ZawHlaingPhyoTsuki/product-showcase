@@ -1,4 +1,4 @@
-import { env } from "@product-showcase/env/web";
+import { env } from "@tcl-ecommerce/env/web";
 import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({

@@ -9,8 +9,20 @@ model User {
   sessions      Session[]
   accounts      Account[]
 
+  // app fields
+  imagePublicId  String?
+  role           Role    @default(CUSTOMER)
+  seller         Seller?
+  buyerOrders    Order[]  @relation("BuyerOrders")
+
   @@unique([email])
   @@map("user")
+}
+
+enum Role {
+  ADMIN
+  SELLER
+  CUSTOMER
 }
 
 model Session {

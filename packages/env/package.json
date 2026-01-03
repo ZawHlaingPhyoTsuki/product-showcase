@@ -1,11 +1,12 @@
 {
-	"name": "@product-showcase/env",
+	"name": "@tcl-ecommerce/env",
 	"version": "0.0.0",
 	"private": true,
 	"type": "module",
 	"exports": {
 		"./server": "./src/server.ts",
-		"./web": "./src/web.ts"
+		"./web": "./src/web.ts",
+		"./native": "./src/native.ts"
 	},
 	"dependencies": {
 		"zod": "catalog:",
@@ -16,6 +17,6 @@
 	"devDependencies": {
 		"typescript": "catalog:",
 		"@types/bun": "catalog:",
-		"@product-showcase/config": "workspace:*"
+		"@tcl-ecommerce/config": "workspace:*"
 	}
 }

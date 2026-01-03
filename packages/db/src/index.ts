@@ -1,5 +1,5 @@
 import { PrismaPg } from "@prisma/adapter-pg";
-import { env } from "@product-showcase/env/server";
+import { env } from "@tcl-ecommerce/env/server";
 
 import { PrismaClient } from "../prisma/generated/client";
 

@@ -11,14 +11,15 @@
 		"start": "bun run dist/index.mjs"
 	},
 	"dependencies": {
-		"express": "^5.1.0",
-		"cors": "^2.8.5",
+		"@tcl-ecommerce/auth": "workspace:*",
+		"@tcl-ecommerce/db": "workspace:*",
+		"@tcl-ecommerce/env": "workspace:*",
 		"better-auth": "catalog:",
+		"cloudinary": "^2.8.0",
+		"cors": "^2.8.5",
 		"dotenv": "catalog:",
-		"zod": "catalog:",
-		"@product-showcase/env": "workspace:*",
-		"@product-showcase/auth": "workspace:*",
-		"@product-showcase/db": "workspace:*"
+		"express": "^5.1.0",
+		"zod": "catalog:"
 	},
 	"devDependencies": {
 		"@types/express": "^5.0.1",
@@ -26,6 +27,6 @@
 		"@types/bun": "catalog:",
 		"typescript": "catalog:",
 		"tsdown": "^0.16.5",
-		"@product-showcase/config": "workspace:*"
+		"@tcl-ecommerce/config": "workspace:*"
 	}
 }

@@ -1,0 +1,64 @@
+// for the customer's one-time payment 
+model Order {
+    id              String        @id @default(uuid())
+    totalAmount     Int
+    deliveryAddress String
+    paymentMethod   PaymentMethod
+    paymentStatus   PaymentStatus @default(PENDING)
+
+    buyerId   String
+    buyer     User       @relation("BuyerOrders", fields: [buyerId], references: [id])
+    subOrders SubOrder[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+// for the seller
+model SubOrder {
+    id          String      @id @default(uuid())
+    status      OrderStatus @default(PENDING) // Each seller manages their own shipping status
+    totalAmount Int // Total for this specific seller's portion
+
+    // Link to the main order
+    orderId   String
+    order     Order       @relation(fields: [orderId], references: [id])
+    // Link to the specific seller
+    sellerId  String
+    seller    Seller      @relation(fields: [sellerId], references: [id])
+    items     OrderItem[] // Items specific to this seller
+    createdAt DateTime    @default(now())
+    updatedAt DateTime    @updatedAt
+}
+
+model OrderItem {
+    id           String  @id @default(uuid())
+    quantity     Int
+    productName  String
+    productPrice Int // Price at the time of order
+    productImage String?
+
+    productId  String?
+    product    Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+    subOrderId String
+    subOrder   SubOrder @relation(fields: [subOrderId], references: [id])
+}
+
+enum OrderStatus {
+    PENDING
+    SHIPPED
+    DELIVERED
+    CANCELLED
+}
+
+enum PaymentStatus {
+    PENDING
+    PAID
+    FAILED
+    REFUNDED
+}
+
+enum PaymentMethod {
+    CASH_ON_DELIVERY
+    KBZ_PAY
+}

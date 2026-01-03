@@ -1,4 +1,4 @@
-import type { auth } from "@product-showcase/auth";
+import type { auth } from "@tcl-ecommerce/auth";
 
 declare global {
 	namespace Express {

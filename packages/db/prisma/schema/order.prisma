@@ -38,8 +38,8 @@ model OrderItem {
     productPrice Int // Price at the time of order
     productImage String?
 
-    productId  String
-    product    Product  @relation(fields: [productId], references: [id])
+    productId  String?
+    product    Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
     subOrderId String
     subOrder   SubOrder @relation(fields: [subOrderId], references: [id])
 }

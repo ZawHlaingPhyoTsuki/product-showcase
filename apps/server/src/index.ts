@@ -1,3 +1,4 @@
+import "./utils/cloudinary";
 import { auth } from "@tcl-ecommerce/auth";
 import { env } from "@tcl-ecommerce/env/server";
 import { toNodeHandler } from "better-auth/node";

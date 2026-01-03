@@ -24,20 +24,3 @@ export async function requireAuth(
 		return res.status(500).json({ message: "Internal server error" });
 	}
 }
-
-export async function isSellerAuth(
-	req: Request,
-	res: Response,
-	next: NextFunction,
-) {
-	try {
-		if (req.user.isSeller !== true) {
-			return res.status(403).json({ message: "Forbidden" });
-		}
-
-		next();
-	} catch (error) {
-		console.error("Auth error:", error);
-		return res.status(500).json({ message: "Internal server error" });
-	}
-}

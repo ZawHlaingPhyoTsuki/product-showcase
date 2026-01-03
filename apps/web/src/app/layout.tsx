@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 
 import { Geist, Geist_Mono } from "next/font/google";
-
+import { NextIntlClientProvider } from "next-intl";
 import "../index.css";
+import { getLocale, getMessages } from "next-intl/server";
 import Header from "@/components/header";
 import Providers from "@/components/providers";
 
@@ -21,22 +22,29 @@ export const metadata: Metadata = {
 	description: "tcl-ecommerce",
 };
 
-export default function RootLayout({
-	children,
-}: Readonly<{
+interface RootLayoutProps {
 	children: React.ReactNode;
-}>) {
+}
+
+export default async function RootLayout({
+	children,
+}: Readonly<RootLayoutProps>) {
+	const locale = await getLocale();
+	const messages = await getMessages();
+
 	return (
-		<html lang="en" suppressHydrationWarning>
+		<html lang={locale} suppressHydrationWarning>
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				<Providers>
-					<div className="grid h-svh grid-rows-[auto_1fr]">
-						<Header />
-						{children}
-					</div>
-				</Providers>
+				<NextIntlClientProvider messages={messages}>
+					<Providers>
+						<div className="grid h-svh grid-rows-[auto_1fr]">
+							<Header />
+							{children}
+						</div>
+					</Providers>
+				</NextIntlClientProvider>
 			</body>
 		</html>
 	);

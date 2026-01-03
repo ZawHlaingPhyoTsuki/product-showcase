@@ -3,10 +3,6 @@ model Seller {
     shopName       String  @unique
     slug           String  @unique
     bio            String?
-    avatarUrl      String?
-    avatarPublicId String?
-    coverUrl       String?
-    coverPublicId  String?
 
     products  Product[]
     subOrders SubOrder[]

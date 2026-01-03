@@ -36,9 +36,9 @@
 		"db:down": "turbo -F @tcl-ecommerce/db db:down"
 	},
 	"dependencies": {
+		"@tcl-ecommerce/env": "workspace:*",
 		"dotenv": "catalog:",
-		"zod": "catalog:",
-		"@tcl-ecommerce/env": "workspace:*"
+		"zod": "catalog:"
 	},
 	"devDependencies": {
 		"turbo": "^2.6.3",

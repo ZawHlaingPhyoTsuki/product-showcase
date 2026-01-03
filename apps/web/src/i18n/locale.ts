@@ -19,5 +19,10 @@ export async function getUserLocale() {
 }
 
 export async function setUserLocale(locale: Locale) {
-	(await cookies()).set(COOKIE_NAME, locale);
+	(await cookies()).set(COOKIE_NAME, locale, {
+		httpOnly: true,
+		secure: process.env.NODE_ENV === "production",
+		sameSite: "lax",
+		maxAge: 60 * 60 * 24 * 30, // 30 days
+	});
 }

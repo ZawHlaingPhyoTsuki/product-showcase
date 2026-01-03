@@ -27,9 +27,9 @@ export default function LocaleSwitcherSelect({
 	const [isPending, startTransition] = useTransition();
 
 	function onChange(value: string | null) {
-		const locale = value as Locale;
+		if (!value) return;
 		startTransition(() => {
-			setUserLocale(locale);
+			setUserLocale(value as Locale);
 		});
 	}
 

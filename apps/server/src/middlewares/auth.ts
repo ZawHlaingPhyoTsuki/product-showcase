@@ -23,7 +23,7 @@ export const requireAuth = async (
 		console.error("Auth error:", error);
 		return res.status(500).json({ message: "Internal server error" });
 	}
-}
+};
 
 export const requireRoles = (roles: string[]) => {
 	return (req: Request, res: Response, next: NextFunction) => {

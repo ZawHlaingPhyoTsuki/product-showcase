@@ -2,11 +2,11 @@ import { auth } from "@tcl-ecommerce/auth";
 import { fromNodeHeaders } from "better-auth/node";
 import type { NextFunction, Request, Response } from "express";
 
-export async function requireAuth(
+export const requireAuth = async (
 	req: Request,
 	res: Response,
 	next: NextFunction,
-) {
+) => {
 	try {
 		const session = await auth.api.getSession({
 			headers: fromNodeHeaders(req.headers),
@@ -24,3 +24,13 @@ export async function requireAuth(
 		return res.status(500).json({ message: "Internal server error" });
 	}
 }
+
+export const requireRoles = (roles: string[]) => {
+	return (req: Request, res: Response, next: NextFunction) => {
+		if (!req.user || !roles.includes(req.user.role)) {
+			return res.status(403).json({ message: "Forbidden" });
+		}
+
+		next();
+	};
+};

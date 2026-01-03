@@ -1,5 +1,5 @@
 import { expo } from "@better-auth/expo";
-import prisma from "@tcl-ecommerce/db";
+import prisma, { Role } from "@tcl-ecommerce/db";
 import { env } from "@tcl-ecommerce/env/server";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
@@ -11,6 +11,14 @@ export const auth = betterAuth({
 	trustedOrigins: [env.CORS_ORIGIN, "tcl-ecommerce://", "exp://"],
 	emailAndPassword: {
 		enabled: true,
+	},
+	user: {
+		additionalFields: {
+			role: {
+				type: "string",
+				default: Role.CUSTOMER,
+			},
+		},
 	},
 	advanced: {
 		defaultCookieAttributes: {

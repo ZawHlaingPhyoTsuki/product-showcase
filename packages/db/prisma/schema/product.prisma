@@ -10,7 +10,7 @@ model Product {
 
     category   Category    @relation(fields: [categoryId], references: [id], onDelete: Restrict)
     categoryId String
-    seller     Seller      @relation(fields: [sellerId], references: [id])
+    seller     Seller      @relation(fields: [sellerId], references: [id], onDelete: Cascade)
     sellerId   String
     orderItems OrderItem[]
 

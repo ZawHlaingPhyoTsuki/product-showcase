@@ -89,13 +89,15 @@ export const deleteSellerService = async (userId: string) => {
 		throw ApiError.notFound("Seller not found");
 	}
 
-	await prisma.seller.delete({
-		where: { id: seller.id },
-	});
+	await prisma.$transaction(async (tx) => {
+		await tx.seller.delete({
+			where: { id: seller.id },
+		});
 
-	await prisma.user.update({
-		where: { id: userId },
-		data: { role: Role.CUSTOMER },
+		await tx.user.update({
+			where: { id: userId },
+			data: { role: Role.CUSTOMER },
+		});
 	});
 
 	return {

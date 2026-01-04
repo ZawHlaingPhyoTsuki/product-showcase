@@ -1,7 +1,7 @@
 import z from "zod";
 
 export const SellerIdSchema = z.object({
-	sellerId: z.uuidv4("Invalid seller ID format"),
+	sellerId: z.uuidv4({ error: "Invalid seller ID format" }),
 });
 
 export const GetAllSellersQuerySchema = z.object({

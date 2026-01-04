@@ -1,4 +1,4 @@
-import prisma, { type Prisma, SellerStatus } from "@tcl-ecommerce/db";
+import prisma, { type Prisma, Role, SellerStatus } from "@tcl-ecommerce/db";
 import { ApiError } from "@/utils/api-error";
 import type { GetAllSellersQueryType } from "./dto";
 
@@ -77,9 +77,21 @@ export const approveSellerRegisterService = async (sellerId: string) => {
 		throw ApiError.badRequest("Seller is already approved");
 	}
 
-	await prisma.seller.update({
-		where: { id: sellerId },
-		data: { status: SellerStatus.APPROVED },
+	// await prisma.seller.update({
+	// 	where: { id: sellerId },
+	// 	data: { status: SellerStatus.APPROVED },
+	// });
+
+	await prisma.$transaction(async (tx) => {
+		await tx.seller.update({
+			where: { id: sellerId },
+			data: { status: SellerStatus.APPROVED },
+		});
+
+		await tx.user.update({
+			where: { id: seller.userId },
+			data: { role: Role.SELLER },
+		});
 	});
 
 	return {

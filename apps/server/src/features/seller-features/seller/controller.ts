@@ -1,5 +1,4 @@
 import type { NextFunction, Request, Response } from "express";
-import { ApiError } from "@/utils/api-error";
 import { RegisterSellerSchema } from "./dto";
 import {
 	deleteSellerService,
@@ -16,8 +15,7 @@ export const registerSellerController = async (
 		const parsed = RegisterSellerSchema.safeParse(req.body);
 
 		if (!parsed.success) {
-			throw ApiError.badRequest("Invalid data");
-			// ZodError will be caught by errorHandler
+			throw parsed.error;
 		}
 
 		const result = await registerSellerService(parsed.data, req.user.id);

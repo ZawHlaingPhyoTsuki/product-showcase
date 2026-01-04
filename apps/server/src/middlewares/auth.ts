@@ -35,31 +35,38 @@ export const requireRoles = (roles: string[]) => {
 		}
 
 		if (req.user.role === "SELLER") {
-			const seller = await prisma.seller.findUnique({
-				where: { userId: req.user.id },
-				select: { status: true },
-			});
-
-			if (!seller) {
-				return res.status(403).json({
-					success: false,
-					message: "Forbidden - you are not registered as a seller",
+			try {
+				const seller = await prisma.seller.findUnique({
+					where: { userId: req.user.id },
+					select: { status: true },
 				});
-			}
 
-			if (seller.status !== "APPROVED") {
-				return res
-					.status(403)
-					.json({
+				if (!seller) {
+					return res.status(403).json({
+						success: false,
+						message: "Forbidden - you are not registered as a seller",
+					});
+				}
+
+				if (seller.status !== SellerStatus.APPROVED) {
+					return res.status(403).json({
 						success: false,
 						message:
 							seller.status === SellerStatus.PENDING
 								? "Your seller account is still pending approval"
-								: "Your seller account is not approved",
+								: seller.status === SellerStatus.REJECTED
+									? "Your seller account has been rejected"
+									: "Your seller account is not approved",
 					});
-			}
+				}
 
-			next();
+				next();
+			} catch (error) {
+				console.error("Seller validation error:", error);
+				return res
+					.status(500)
+					.json({ success: false, message: "Internal server error" });
+			}
 		}
 
 		next();

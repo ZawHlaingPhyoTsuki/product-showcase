@@ -23,27 +23,18 @@ export const registerSellerService = async (
 	const uniqueSlug = await generateUniqueSlug(baseSlug, prisma.seller);
 
 	// Create seller in a transaction
-	const seller = await prisma.$transaction(async (tx) => {
-		const newSeller = await tx.seller.create({
-			data: {
-				shopName,
-				slug: uniqueSlug,
-				bio: bio || null,
-				phone: phone || null,
-				address: address || null,
-				status: SellerStatus.PENDING,
-				user: {
-					connect: { id: userId },
-				},
+	const seller = await prisma.seller.create({
+		data: {
+			shopName,
+			slug: uniqueSlug,
+			bio: bio || null,
+			phone: phone || null,
+			address: address || null,
+			status: SellerStatus.PENDING,
+			user: {
+				connect: { id: userId },
 			},
-		});
-
-		await tx.user.update({
-			where: { id: userId },
-			data: { role: Role.SELLER },
-		});
-
-		return newSeller;
+		},
 	});
 
 	return {
@@ -83,10 +74,19 @@ export const sellerProfileService = async (userId: string) => {
 export const deleteSellerService = async (userId: string) => {
 	const seller = await prisma.seller.findUnique({
 		where: { userId },
+		include: {
+			products: true,
+		},
 	});
 
 	if (!seller) {
 		throw ApiError.notFound("Seller not found");
+	}
+
+	if (seller.products.length > 0) {
+		throw ApiError.conflict(
+			"Cannot delete seller with existing products. Please remove all products first.",
+		);
 	}
 
 	await prisma.$transaction(async (tx) => {

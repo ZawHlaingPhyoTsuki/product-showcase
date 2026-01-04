@@ -10,7 +10,7 @@ import {
 const router: Router = Router();
 
 router.post("/register", registerSellerController);
-router.get("/profile", requireRoles([Role.SELLER]), sellerProfileController);
+router.get("/profile", sellerProfileController);
 router.delete("/", requireRoles([Role.SELLER]), deleteSellerController);
 
 export default router;

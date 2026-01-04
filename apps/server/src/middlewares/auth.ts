@@ -13,7 +13,7 @@ export const requireAuth = async (
 		});
 
 		if (!session) {
-			return res.status(401).json({ message: "Unauthorized" });
+			return res.status(401).json({ success: false, message: "Unauthorized" });
 		}
 
 		req.user = session.user;
@@ -21,14 +21,16 @@ export const requireAuth = async (
 		next();
 	} catch (error) {
 		console.error("Auth error:", error);
-		return res.status(500).json({ message: "Internal server error" });
+		return res
+			.status(500)
+			.json({ success: false, message: "Internal server error" });
 	}
 };
 
 export const requireRoles = (roles: string[]) => {
 	return (req: Request, res: Response, next: NextFunction) => {
 		if (!req.user || !roles.includes(req.user.role)) {
-			return res.status(403).json({ message: "Forbidden" });
+			return res.status(403).json({ success: false, message: "Forbidden" });
 		}
 
 		next();

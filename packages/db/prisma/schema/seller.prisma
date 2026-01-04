@@ -1,8 +1,11 @@
 model Seller {
-    id             String  @id @default(uuid())
-    shopName       String  @unique
-    slug           String  @unique
-    bio            String?
+    id       String  @id @default(uuid())
+    shopName String  @unique
+    slug     String  @unique
+    bio      String?
+    phone    String?
+    address  String?
+    status   SellerStatus @default(PENDING)
 
     products  Product[]
     subOrders SubOrder[]
@@ -13,4 +16,10 @@ model Seller {
     updatedAt DateTime @updatedAt
 
     @@map("seller")
+}
+
+enum SellerStatus {
+    PENDING
+    APPROVED
+    REJECTED
 }

@@ -15,6 +15,7 @@ model Product {
     orderItems OrderItem[]
 
     isArchived Boolean @default(false)
+    archivedAt DateTime?
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt

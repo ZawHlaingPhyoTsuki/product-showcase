@@ -1,16 +1,14 @@
 import "./utils/cloudinary";
 import { auth } from "@tcl-ecommerce/auth";
-import { Role } from "@tcl-ecommerce/db";
 import { env } from "@tcl-ecommerce/env/server";
 import { toNodeHandler } from "better-auth/node";
 import cors from "cors";
 import express from "express";
 // ROUTES
-import adminRouter from "./features/admin-features";
-import customerRouter from "./features/customer-features";
-import sellerRouter from "./features/seller-features";
+import productRouter from "./features/product/router";
+import sellerRouter from "./features/seller/router";
 // MIDDLEWARES
-import { errorHandler, requireAuth, requireRoles } from "./middlewares";
+import { errorHandler } from "./middlewares";
 
 const app = express();
 
@@ -31,9 +29,8 @@ app.get("/", (_req, res) => {
 	res.status(200).send("OK");
 });
 
-app.use("/api/customers", customerRouter);
-app.use("/api/sellers", requireAuth, sellerRouter);
-app.use("/api/admins", requireAuth, requireRoles([Role.ADMIN]), adminRouter);
+app.use("/api/", sellerRouter);
+app.use("/api/products", productRouter);
 
 app.use(errorHandler);
 
